@@ -3,113 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding Fun Facts Generator</title>
+    <title>Fun Fact Generator</title>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
             margin: 0;
-            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
         }
 
         .container {
             text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             max-width: 600px;
-            margin: 20px;
-            animation: fadeIn 0.8s ease-out;
+            width: 90%;
         }
 
         h1 {
-            color: #2c3e50;
-            animation: slideIn 1s ease-out;
+            color: white;
+            margin-bottom: 2rem;
+            animation: bounce 1s infinite;
         }
 
-        #factDisplay {
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        #fact {
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
 
-        #factDisplay.animate {
-            animation: fadeIn 0.5s ease-out;
+        #fact.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+            color: #FF6B6B;
+            font-weight: bold;
         }
 
         button:hover {
-            background-color: #45a049;
             transform: scale(1.05);
+            background: #FF6B6B;
+            color: white;
         }
 
-        button:active {
-            transform: scale(0.95);
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
     </style>
 </head>
 <body>
+    <div class="hearts"></div>
     <div class="container">
-        <h1>Coding Fun Facts Generator</h1>
-        <div id="factDisplay">Click the button to get a fun fact!</div>
-        <button onclick="generateFact()">Generate Fun Fact</button>
+        <h1>🎯 Fun Fact Generator</h1>
+        <div id="fact">Click the button to get a fun fact!</div>
+        <button onclick="generateFact()">Generate Fact</button>
     </div>
 
     <script>
-        const facts = {
-            "codingFacts": [
-                /* Your existing facts array */
-            ]
-        };
+        const facts = [
+            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old!",
+            "A day on Venus is longer than its year. Venus takes 243 Earth days to rotate on its axis but only 225 Earth days to orbit the Sun.",
+            "Bananas are berries, but strawberries aren't!",
+            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after just 38 minutes.",
+            "Cows have best friends and get stressed when separated from them.",
+            "The first oranges weren't orange! The original oranges from Southeast Asia were actually green.",
+            "A cloud can weigh more than a million pounds.",
+            "Octopuses have three hearts and their blood is blue.",
+            "The average person spends 6 months of their lifetime waiting for red lights to turn green.",
+            "Antarctica is technically a desert due to its low precipitation.",
+            "The longest time between two twins being born is 87 days.",
+            "A day on Pluto is 153 hours long.",
+            "Sloths can hold their breath for up to 40 minutes underwater.",
+            "The Great Wall of China is not visible from space with the naked eye.",
+            "Humans are the only animals that blush.",
+            "A flamingo's head has to be upside down when it eats.",
+            "The Hawaiian alphabet only has 12 letters.",
+            "A snail can sleep for three years at a time.",
+            "The fingerprints of koalas are so similar to human fingerprints that they could taint crime scenes.",
+            "Rabbits can't vomit."
+        ];
 
         function generateFact() {
-            const factDisplay = document.getElementById('factDisplay');
-            factDisplay.style.opacity = '0';
+            const factElement = document.getElementById('fact');
+            factElement.classList.remove('show');
             
             setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * facts.codingFacts.length);
-                factDisplay.textContent = facts.codingFacts[randomIndex].fact;
-                factDisplay.style.opacity = '1';
-                factDisplay.classList.remove('animate');
-                void factDisplay.offsetWidth; // Trigger reflow
-                factDisplay.classList.add('animate');
-            }, 200);
+                const randomFact = facts[Math.floor(Math.random() * facts.length)];
+                factElement.textContent = randomFact;
+                factElement.classList.add('show');
+                createHeart();
+            }, 500);
         }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animation = 'float ' + (Math.random() * 3 + 2) + 's linear';
+            document.querySelector('.hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('fact').classList.add('show');
+            }, 500);
+        });
+
+        // Add floating hearts animation
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                @keyframes float {
+                    to {
+                        transform: translateY(-100vh);
+                    }
+                }
+            </style>
+        `);
     </script>
 </body>
 </html>
