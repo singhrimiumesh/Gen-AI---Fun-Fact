@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Fun Facts Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        #factDisplay {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coding Fun Facts Generator</h1>
+        <div id="factDisplay">Click the button to get a fun fact!</div>
+        <button onclick="generateFact()">Generate Fun Fact</button>
+    </div>
+
+    <script>
+        const facts = {
+            "codingFacts": [
+                {
+                    "id": 1,
+                    "fact": "The first computer programmer was a woman named Ada Lovelace, who wrote the first algorithm designed to be processed by a machine in the 1840s."
+                },
+                {
+                    "id": 2,
+                    "fact": "The first computer bug was an actual real-life bug. A moth was found trapped in a computer relay in 1947, causing it to malfunction."
+                },
+                {
+                    "id": 3,
+                    "fact": "The most popular programming language, Python, was named after the comedy show 'Monty Python', not the snake."
+                },
+                {
+                    "id": 4,
+                    "fact": "The first website ever created is still online! You can visit it at info.cern.ch."
+                },
+                {
+                    "id": 5,
+                    "fact": "The programming language C was created between 1969 and 1973, and most modern programming languages are still influenced by it."
+                },
+                {
+                    "id": 6,
+                    "fact": "The term 'debugging' originated from removing an actual moth from a computer in 1947."
+                },
+                {
+                    "id": 7,
+                    "fact": "The first computer game was created in 1961. It was called 'Spacewar!' and was developed at MIT."
+                },
+                {
+                    "id": 8,
+                    "fact": "JavaScript was created in just 10 days by Brendan Eich in 1995."
+                },
+                {
+                    "id": 9,
+                    "fact": "The first computer virus was created in 1983 and was called the 'Elk Cloner'."
+                },
+                {
+                    "id": 10,
+                    "fact": "The average programmer writes 10-12 lines of code per day that actually goes into production."
+                }
+            ]
+        };
+
+        function generateFact() {
+            const randomIndex = Math.floor(Math.random() * facts.codingFacts.length);
+            const factDisplay = document.getElementById('factDisplay');
+            factDisplay.textContent = facts.codingFacts[randomIndex].fact;
+        }
+    </script>
+</body>
+</html>
