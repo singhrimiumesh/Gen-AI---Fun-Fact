@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Fact Generator</title>
+    <title>Coding Fun Facts Generator</title>
     <style>
         body {
             margin: 0;
@@ -13,7 +13,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            background: linear-gradient(45deg, #2C3E50, #3498DB);
             color: white;
         }
 
@@ -56,13 +56,13 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #FF6B6B;
+            color: #2C3E50;
             font-weight: bold;
         }
 
         button:hover {
             transform: scale(1.05);
-            background: #FF6B6B;
+            background: #3498DB;
             color: white;
         }
 
@@ -75,46 +75,45 @@
             }
         }
 
-        .hearts {
+        .code-particles {
             position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: -1;
         }
-
     </style>
 </head>
 <body>
-    <div class="hearts"></div>
+    <div class="code-particles"></div>
     <div class="container">
-        <h1>🎯 Fun Fact Generator</h1>
-        <div id="fact">Click the button to get a fun fact!</div>
+        <h1>💻 Coding Fun Facts</h1>
+        <div id="fact">Click the button to get a coding fun fact!</div>
         <button onclick="generateFact()">Generate Fact</button>
     </div>
 
     <script>
         const facts = [
-            "Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old!",
-            "A day on Venus is longer than its year. Venus takes 243 Earth days to rotate on its axis but only 225 Earth days to orbit the Sun.",
-            "Bananas are berries, but strawberries aren't!",
-            "The shortest war in history was between Britain and Zanzibar on August 27, 1896. Zanzibar surrendered after just 38 minutes.",
-            "Cows have best friends and get stressed when separated from them.",
-            "The first oranges weren't orange! The original oranges from Southeast Asia were actually green.",
-            "A cloud can weigh more than a million pounds.",
-            "Octopuses have three hearts and their blood is blue.",
-            "The average person spends 6 months of their lifetime waiting for red lights to turn green.",
-            "Antarctica is technically a desert due to its low precipitation.",
-            "The longest time between two twins being born is 87 days.",
-            "A day on Pluto is 153 hours long.",
-            "Sloths can hold their breath for up to 40 minutes underwater.",
-            "The Great Wall of China is not visible from space with the naked eye.",
-            "Humans are the only animals that blush.",
-            "A flamingo's head has to be upside down when it eats.",
-            "The Hawaiian alphabet only has 12 letters.",
-            "A snail can sleep for three years at a time.",
-            "The fingerprints of koalas are so similar to human fingerprints that they could taint crime scenes.",
-            "Rabbits can't vomit."
+            "The first computer bug was an actual bug - a moth found trapped in a computer relay in 1947!",
+            "The programming language Python was named after Monty Python, not the snake.",
+            "The first programmer in history was Ada Lovelace, a woman who lived in the 1800s.",
+            "Most websites use about 30 different programming languages to work properly.",
+            "The first computer mouse was made of wood in the 1960s.",
+            "The term 'debugging' was coined by Grace Hopper after removing a moth from a computer.",
+            "The first computer virus was created in 1983 and was called 'Elk Cloner'.",
+            "JavaScript was created in just 10 days by Brendan Eich in 1995.",
+            "The first website ever is still online: http://info.cern.ch",
+            "The QWERTY keyboard layout was designed to prevent typewriter jams.",
+            "There are over 700 different programming languages.",
+            "The first computer game was created in 1961 called 'Spacewar!'",
+            "HTML was created by Tim Berners-Lee in 1990.",
+            "The SQL language was initially called SEQUEL.",
+            "The term 'Wi-Fi' doesn't actually stand for anything!",
+            "The first email was sent by Ray Tomlinson to himself in 1971.",
+            "The most popular programming language, JavaScript, was created in just 10 days.",
+            "The first computer password was created in 1961 at MIT.",
+            "Google processes over 3.5 billion searches per day using complex algorithms.",
+            "The first smartphone IBM Simon was released in 1994 and cost $1,100."
         ];
 
         function generateFact() {
@@ -125,22 +124,24 @@
                 const randomFact = facts[Math.floor(Math.random() * facts.length)];
                 factElement.textContent = randomFact;
                 factElement.classList.add('show');
-                createHeart();
+                createCodeParticle();
             }, 500);
         }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.style.position = 'fixed';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            heart.style.animation = 'float ' + (Math.random() * 3 + 2) + 's linear';
-            document.querySelector('.hearts').appendChild(heart);
+        function createCodeParticle() {
+            const particles = ['{ }', '< >', '//', '[]', '##', '&&'];
+            const particle = document.createElement('div');
+            particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+            particle.style.position = 'fixed';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = '100vh';
+            particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            particle.style.color = 'rgba(255,255,255,0.5)';
+            particle.style.animation = 'float ' + (Math.random() * 3 + 2) + 's linear';
+            document.querySelector('.code-particles').appendChild(particle);
 
             setTimeout(() => {
-                heart.remove();
+                particle.remove();
             }, 5000);
         }
 
@@ -150,7 +151,6 @@
             }, 500);
         });
 
-        // Add floating hearts animation
         document.head.insertAdjacentHTML('beforeend', `
             <style>
                 @keyframes float {
